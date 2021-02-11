@@ -1,13 +1,4 @@
-/* ТЗ
-+1Создан репозиторий goit-markup-hw-05.
-+2 Для всех эффектов ховера и фокуса сделаны переходы. 
-+Время - 250ms, функция распределения времени - cubic-bezier(0.4, 0, 0.2, 1).
-+3 В главной навигации, при помощи псевдоэлемента, сделано подчёркивание текущей ссылки.
-+4 В секции Чем мы занимаемся текст спозиционирован поверх изображения.
-+5 В секции Портфолио, синий оверлей с текстом поверх изображения выезжает снизу изображения
-+6 Есть разметка и оформление модального окна и его бекдропа (тёмного полупрозрачного фона).
-+7 Изначально модальное окно скрыто при помощи класса is-hidden (свойства visibility, opacity и pointer-events). Если класс убрать - модалка появляется.
-+8 Появление и скрытие модального окна анимированы при помощи перехода с произвольным эффектом, например scale или translate, и opacity.*/
+/* Появление и скрытие модального окна анимированы при помощи перехода */
 
 :root {
   --text-font: "Roboto", sans-serif;
@@ -823,19 +814,32 @@ contacts-icon:focus {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);
-  transition: all var(--transition-time) var(--time-function);
+
+  opacity: 1;
+  transition: opacity var(--transition-time) var(--time-function);
 }
 
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 528px;
   height: 581px;
   background-color: var(--main-white-color);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--transition-time) var(--time-function);
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.9);
 }
 
 .modal-close-btn {
@@ -850,15 +854,16 @@ contacts-icon:focus {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   cursor: pointer;
+  transition: fill var(--transition-time) var(--time-function);
 }
 
 .btn-close-icon {
   fill: var(--dark-black);
 }
 
-.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+.modal-close-btn:hover .btn-close-icon,
+.modal-close-btn:focus .btn-close-icon {
+  fill: var(--accent-color);
 }
+
 /* ============MODAL WINDOW END============ */
